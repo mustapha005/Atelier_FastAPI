@@ -2,26 +2,6 @@
 
 Mustapha Aarab et Aya Agrigah
 
-## Interface Streamlit
-
-### Déploiement sur Streamlit Community Cloud
-
-Choisir le dépôt, la branche `main`, le fichier `streamlit_app.py`, puis
-**Advanced settings → Python version → 3.12** avant de déployer.
-TensorFlow 2.21.0 n'a pas de paquet compatible avec Python 3.14.
-Pour changer Python sur une application existante, noter ses paramètres,
-supprimer uniquement le déploiement Streamlit puis le recréer en Python 3.12.
-
-Sans `FASHION_API_URL`, l'interface fonctionne en mode autonome : elle charge
-le modèle embarqué une seule fois et réutilise la fonction de prédiction de
-`app.py`. Aucun serveur FastAPI séparé n'est nécessaire sur Streamlit Cloud.
-Pour le TP et les tests HTTP, démarrer FastAPI et définir `FASHION_API_URL`.
-
-L'interface française propose 20 exemples Fashion-MNIST inclus dans le dépôt,
-l'import PNG/JPEG, un aperçu des pixels envoyés, la classe prédite, la confiance,
-la latence, le téléchargement JSON et les résultats de la campagne du TP.
-Le rapport Word est disponible dans l'onglet À propos.
-
 Après installation des dépendances, lancer FastAPI dans un premier terminal :
 
 ```powershell
