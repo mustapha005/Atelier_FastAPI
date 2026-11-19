@@ -1,0 +1,41 @@
+:root { --ink:#17243d; --muted:#586781; --purple:#6650d8; }
+.stApp { background: #f4f6fb; color:var(--ink); }
+[data-testid="stHeader"] { background:rgba(244,246,251,.94); }
+.block-container { max-width:1250px; padding-top:2.2rem; padding-bottom:3rem; }
+[data-testid="stSidebar"] { background:#18243c; border-right:0; }
+[data-testid="stSidebar"] * { color:#e4eaf6; }
+[data-testid="stSidebar"] [data-testid="stAlert"] * { color:#17243d; }
+[data-testid="stSidebar"] hr { border-color:#37435b; }
+[data-testid="stSidebar"] code { color:#17243d; }
+.brand {display:flex; align-items:center; gap:12px; font-size:24px; font-weight:750; letter-spacing:-.8px; margin-bottom:28px; }
+.brand-icon {display:grid; place-items:center; width:42px; height:42px; background:#aa99ff; color:#18243c!important; border-radius:14px; font-size:23px; }
+.sidebar-label {font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#a9b9d6!important; margin:22px 0 12px; }
+.hero {position:relative; overflow:hidden; padding:38px 42px; border-radius:24px; background:linear-gradient(120deg,#202d4b 0%,#353775 65%,#6151a6 100%); color:white; margin-bottom:25px; box-shadow:0 16px 40px #27345815; }
+.hero::after {content:''; position:absolute; width:280px; height:280px; border:45px solid #ffffff09; border-radius:50%; right:-55px; top:-80px; pointer-events:none; }
+.eyebrow {font-size:11px; font-weight:700; letter-spacing:2.2px; color:#ccc2ff; text-transform:uppercase; }
+.hero h1 {color:white; font-size:clamp(30px,4vw,46px); letter-spacing:-1.8px; line-height:1.15; padding:14px 0 12px; margin:0; max-width:720px; }
+.hero p {color:#dce3f4; font-size:15px; max-width:650px; line-height:1.7; margin:0; }
+.hero-tags {display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+.hero-tags span {border:1px solid #ffffff30; border-radius:100px; padding:5px 13px; font-size:11px; color:#e9e7ff; background:#ffffff08; }
+[data-baseweb="tab-list"] {gap:8px; background:#e9edf6; padding:6px; border-radius:14px; margin-bottom:24px; }
+[data-baseweb="tab"] {border-radius:10px; height:42px; padding:0 22px; font-weight:600; color:#586781; }
+[data-baseweb="tab"][aria-selected="true"] {background:white; color:#5542ba; box-shadow:0 2px 8px #27345810; }
+[data-baseweb="tab-highlight"], [data-baseweb="tab-border"] {display:none; }
+h2,h3 {color:#17243d; letter-spacing:-.6px; }
+.section-kicker {color:#7764cb; font-size:11px; text-transform:uppercase; letter-spacing:1.8px; font-weight:700; margin:12px 0 4px; }
+[data-testid="stVerticalBlockBorderWrapper"] > div {border-radius:20px!important; }
+[data-testid="stVerticalBlockBorderWrapper"] {background:white; border-radius:20px; }
+[data-testid="stMetric"] {background:white; border:1px solid #e0e5f0; border-radius:16px; padding:18px 20px; box-shadow:0 5px 15px #27345805; }
+[data-testid="stMetricLabel"] {color:#586781; }
+[data-testid="stMetricValue"] {color:#5140ae; font-weight:750; }
+.stButton > button[kind="primary"] {background:linear-gradient(100deg,#6550d8,#8967df); border:0; padding:12px 24px; min-height:48px; border-radius:12px; font-weight:700; box-shadow:0 6px 16px #6650d825; }
+.stButton > button[kind="primary"]:hover {background:#5542ba; box-shadow:0 8px 20px #6650d840; }
+.stDownloadButton > button {border:1px solid #d9dfeb; border-radius:11px; background:#fff; color:#4d438b; }
+[data-testid="stImage"] img {border-radius:16px; }
+[data-testid="stAlert"] {border-radius:12px; }
+.idle {border:1px dashed #cdd5e7; border-radius:18px; padding:38px 24px; margin-top:18px; text-align:center; background:linear-gradient(135deg,#f7f8ff,#eef6f8); }
+.idle-icon {font-size:32px; color:#7764cb; margin-bottom:10px; }
+.idle strong {display:block; font-size:18px; color:#293854; margin-bottom:10px; }
+.idle p {color:#65738c; font-size:14px; line-height:1.7; max-width:330px; margin:auto; }
+.footer {border-top:1px solid #dfe5f0; margin-top:36px; padding-top:18px; color:#67768e; font-size:12px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; }
+@media(max-width:700px) { .hero {padding:26px 22px;} .hero h1 {letter-spacing:-1px;} .block-container {padding:1.2rem 1rem;} [data-baseweb="tab"] {padding:0 10px; font-size:12px;} [data-testid="stMetric"] {padding:12px;} }

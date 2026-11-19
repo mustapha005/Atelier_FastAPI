@@ -10,9 +10,14 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title="Fashion Lab", page_icon="👕", layout="wide")
-st.title("Fashion Lab")
-st.caption("Classification de vêtements · Mustapha Aarab et Aya Agrigah")
-st.write("Choisissez un exemple ou importez une image pour reconnaître son type de vêtement.")
+st.markdown(f"<style>{(ROOT / 'styles.css').read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
+st.markdown('''<section class="hero">
+<div class="eyebrow">Fashion Lab / Studio de classification</div>
+<h1>Un vêtement. Une image.<br>Une prédiction.</h1>
+<p>Explorez la reconnaissance de vêtements par intelligence artificielle.
+Importez une image et découvrez la classe prédite et son score de confiance.</p>
+<div class="hero-tags"><span>10 catégories</span><span>Fashion-MNIST</span><span>Modèle MLP</span></div>
+</section>''', unsafe_allow_html=True)
 API_URL = os.environ.get("FASHION_API_URL", "").rstrip("/")
 
 
@@ -23,7 +28,9 @@ def local_backend():
     return ImageInput, predict
 
 with st.sidebar:
-    st.header("Le service")
+    st.markdown('<div class="brand"><span class="brand-icon">F</span>Fashion Lab</div><div class="sidebar-label">Votre espace d’analyse</div>', unsafe_allow_html=True)
+    st.write("Du pixel à la catégorie.")
+    st.markdown('<div class="sidebar-label">Moteur de prédiction</div>', unsafe_allow_html=True)
     try:
         if API_URL:
             response = requests.get(API_URL + "/health", timeout=5)
@@ -41,9 +48,12 @@ with st.sidebar:
     st.divider()
     st.write("10 classes · Images de 28 × 28 pixels")
     st.caption("Le modèle est entraîné sur des vêtements isolés, en niveaux de gris, sur fond noir.")
+    st.markdown('<div class="sidebar-label">Réalisé par</div>', unsafe_allow_html=True)
+    st.write("Mustapha Aarab  \nAya Agrigah")
 
 predict_tab, results_tab, about_tab = st.tabs(["Prédire", "Résultats du TP", "À propos"])
 with predict_tab:
+    st.markdown('<div class="section-kicker">01 / Choisir une image</div>', unsafe_allow_html=True)
     source = st.radio("Image à analyser", ["Exemple Fashion-MNIST", "Importer une image"], horizontal=True)
     pixels = None
     true_class = None
@@ -71,11 +81,13 @@ with predict_tab:
                 st.error(f"Impossible de lire cette image : {exc}")
     left, right = st.columns([1, 2], gap="large")
     with left:
+        st.markdown('<div class="section-kicker">Aperçu</div>', unsafe_allow_html=True)
         if pixels is not None:
             st.image(Image.fromarray(pixels).resize((280, 280), Image.Resampling.NEAREST), caption="Image envoyée au modèle", width=280)
             if true_class:
                 st.caption(f"Classe réelle : {true_class}")
     with right:
+        st.markdown('<div class="section-kicker">02 / Lancer l’analyse</div>', unsafe_allow_html=True)
         st.subheader("Résultat de la classification")
         if st.button("Analyser l’image", type="primary", disabled=pixels is None):
             try:
@@ -104,6 +116,10 @@ with predict_tab:
                 st.download_button("Télécharger le résultat", json.dumps(result, indent=2), "prediction.json", "application/json")
             except (requests.RequestException, ValueError, KeyError, ImportError, OSError) as exc:
                 st.error(f"La prédiction a échoué. Vérifiez le modèle et les dépendances, ou le serveur en mode API. {exc}")
+        else:
+            st.markdown('''<div class="idle"><div class="idle-icon">◈</div>
+<strong>Votre prochaine découverte commence ici</strong>
+<p>Sélectionnez une image, puis lancez l’analyse pour afficher la catégorie, la confiance et le temps de traitement.</p></div>''', unsafe_allow_html=True)
 
 with results_tab:
     data = json.loads((ROOT / "resultats/resultats.json").read_text(encoding="utf-8"))
@@ -123,3 +139,5 @@ with about_tab:
     st.write("Architecture : Flatten → Dense 128 avec ReLU → Dense 10. Le modèle contient 101 770 paramètres.")
     report = ROOT / "rapport/Rapport_FastAPI_Aarab_Agrigah.docx"
     st.download_button("Télécharger le rapport Word", report.read_bytes(), report.name, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+
+st.markdown('<div class="footer"><span>Fashion Lab · Classification de vêtements</span><span>Mustapha Aarab &amp; Aya Agrigah · Projet FastAPI</span></div>', unsafe_allow_html=True)
