@@ -1,0 +1,288 @@
+{
+  "executed_at": "2026-11-19T11:33:46.423553+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "python": "3.12.0",
+  "tensorflow": "2.21.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "count": 20,
+  "correct": 18,
+  "accuracy": 0.9,
+  "mean_latency_ms": 8.093885,
+  "min_latency_ms": 6.979,
+  "max_latency_ms": 10.0426,
+  "mean_http_ms": 16.201935002754908,
+  "warmup_latency_ms": 130.7744,
+  "warmup_excluded": true,
+  "checks": [
+    {
+      "name": "3 pixels",
+      "status": 400,
+      "passed": true
+    },
+    {
+      "name": "785 pixels",
+      "status": 400,
+      "passed": true
+    },
+    {
+      "name": "valeur négative",
+      "status": 400,
+      "passed": true
+    },
+    {
+      "name": "valeur supérieure à 255",
+      "status": 400,
+      "passed": true
+    },
+    {
+      "name": "champ absent",
+      "status": 422,
+      "passed": true
+    },
+    {
+      "name": "valeur non numérique",
+      "status": 422,
+      "passed": true
+    },
+    {
+      "name": "équivalence pixels bruts et normalisés",
+      "status": 200,
+      "passed": true
+    }
+  ],
+  "invalid_response": {
+    "status": 400,
+    "body": {
+      "detail": "L'entrée doit contenir exactement 784 pixels."
+    }
+  },
+  "health": {
+    "status": "healthy",
+    "model_loaded": true,
+    "model_name": "fashion_mnist.keras",
+    "input_shape": "(None, 28, 28)",
+    "output_shape": "(None, 10)"
+  },
+  "predictions": [
+    {
+      "image": 0,
+      "true_id": 9,
+      "true_class": "Ankle boot",
+      "class_id": 9,
+      "class_name": "Ankle boot",
+      "confidence": 0.9651696681976318,
+      "latency_ms": 8.451,
+      "http_ms": 16.375699982745573,
+      "correct": true
+    },
+    {
+      "image": 1,
+      "true_id": 2,
+      "true_class": "Pullover",
+      "class_id": 2,
+      "class_name": "Pullover",
+      "confidence": 0.9904109239578247,
+      "latency_ms": 8.2962,
+      "http_ms": 15.914600022369996,
+      "correct": true
+    },
+    {
+      "image": 2,
+      "true_id": 1,
+      "true_class": "Trouser",
+      "class_id": 1,
+      "class_name": "Trouser",
+      "confidence": 0.9999949932098389,
+      "latency_ms": 7.2781,
+      "http_ms": 15.025900007458404,
+      "correct": true
+    },
+    {
+      "image": 3,
+      "true_id": 1,
+      "true_class": "Trouser",
+      "class_id": 1,
+      "class_name": "Trouser",
+      "confidence": 0.99985671043396,
+      "latency_ms": 7.8225,
+      "http_ms": 15.837300015846267,
+      "correct": true
+    },
+    {
+      "image": 4,
+      "true_id": 6,
+      "true_class": "Shirt",
+      "class_id": 6,
+      "class_name": "Shirt",
+      "confidence": 0.6752538084983826,
+      "latency_ms": 8.2321,
+      "http_ms": 15.730000013718382,
+      "correct": true
+    },
+    {
+      "image": 5,
+      "true_id": 1,
+      "true_class": "Trouser",
+      "class_id": 1,
+      "class_name": "Trouser",
+      "confidence": 0.9994551539421082,
+      "latency_ms": 7.9948,
+      "http_ms": 15.537100000074133,
+      "correct": true
+    },
+    {
+      "image": 6,
+      "true_id": 4,
+      "true_class": "Coat",
+      "class_id": 4,
+      "class_name": "Coat",
+      "confidence": 0.9945579767227173,
+      "latency_ms": 7.4075,
+      "http_ms": 15.246399998432025,
+      "correct": true
+    },
+    {
+      "image": 7,
+      "true_id": 6,
+      "true_class": "Shirt",
+      "class_id": 6,
+      "class_name": "Shirt",
+      "confidence": 0.9882292747497559,
+      "latency_ms": 8.0001,
+      "http_ms": 15.658899996196851,
+      "correct": true
+    },
+    {
+      "image": 8,
+      "true_id": 5,
+      "true_class": "Sandal",
+      "class_id": 5,
+      "class_name": "Sandal",
+      "confidence": 0.9999970197677612,
+      "latency_ms": 7.45,
+      "http_ms": 15.102800010936335,
+      "correct": true
+    },
+    {
+      "image": 9,
+      "true_id": 7,
+      "true_class": "Sneaker",
+      "class_id": 7,
+      "class_name": "Sneaker",
+      "confidence": 0.9999984502792358,
+      "latency_ms": 7.6333,
+      "http_ms": 15.04140000906773,
+      "correct": true
+    },
+    {
+      "image": 10,
+      "true_id": 4,
+      "true_class": "Coat",
+      "class_id": 4,
+      "class_name": "Coat",
+      "confidence": 0.982043981552124,
+      "latency_ms": 7.8965,
+      "http_ms": 15.83969997591339,
+      "correct": true
+    },
+    {
+      "image": 11,
+      "true_id": 5,
+      "true_class": "Sandal",
+      "class_id": 5,
+      "class_name": "Sandal",
+      "confidence": 0.9998078942298889,
+      "latency_ms": 7.624,
+      "http_ms": 16.423299995949492,
+      "correct": true
+    },
+    {
+      "image": 12,
+      "true_id": 7,
+      "true_class": "Sneaker",
+      "class_id": 5,
+      "class_name": "Sandal",
+      "confidence": 0.9347268342971802,
+      "latency_ms": 7.2441,
+      "http_ms": 14.998500002548099,
+      "correct": false
+    },
+    {
+      "image": 13,
+      "true_id": 3,
+      "true_class": "Dress",
+      "class_id": 3,
+      "class_name": "Dress",
+      "confidence": 0.9998944997787476,
+      "latency_ms": 7.4322,
+      "http_ms": 14.802399993641302,
+      "correct": true
+    },
+    {
+      "image": 14,
+      "true_id": 4,
+      "true_class": "Coat",
+      "class_id": 4,
+      "class_name": "Coat",
+      "confidence": 0.8230250477790833,
+      "latency_ms": 6.979,
+      "http_ms": 14.608199999202043,
+      "correct": true
+    },
+    {
+      "image": 15,
+      "true_id": 1,
+      "true_class": "Trouser",
+      "class_id": 1,
+      "class_name": "Trouser",
+      "confidence": 0.9992409944534302,
+      "latency_ms": 8.5402,
+      "http_ms": 17.376600007992238,
+      "correct": true
+    },
+    {
+      "image": 16,
+      "true_id": 2,
+      "true_class": "Pullover",
+      "class_id": 2,
+      "class_name": "Pullover",
+      "confidence": 0.9819099307060242,
+      "latency_ms": 9.2974,
+      "http_ms": 18.917700013844296,
+      "correct": true
+    },
+    {
+      "image": 17,
+      "true_id": 4,
+      "true_class": "Coat",
+      "class_id": 2,
+      "class_name": "Pullover",
+      "confidence": 0.6880495548248291,
+      "latency_ms": 9.1823,
+      "http_ms": 18.628599995281547,
+      "correct": false
+    },
+    {
+      "image": 18,
+      "true_id": 8,
+      "true_class": "Bag",
+      "class_id": 8,
+      "class_name": "Bag",
+      "confidence": 0.9999839067459106,
+      "latency_ms": 10.0426,
+      "http_ms": 18.990799988387153,
+      "correct": true
+    },
+    {
+      "image": 19,
+      "true_id": 0,
+      "true_class": "T-shirt/top",
+      "class_id": 0,
+      "class_name": "T-shirt/top",
+      "confidence": 0.9857839345932007,
+      "latency_ms": 9.0738,
+      "http_ms": 17.982800025492907,
+      "correct": true
+    }
+  ]
+}
