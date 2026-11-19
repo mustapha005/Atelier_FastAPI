@@ -13,18 +13,28 @@ st.set_page_config(page_title="Fashion Lab", page_icon="👕", layout="wide")
 st.title("Fashion Lab")
 st.caption("Classification de vêtements · Mustapha Aarab et Aya Agrigah")
 st.write("Choisissez un exemple ou importez une image pour reconnaître son type de vêtement.")
-API_URL = os.environ.get("FASHION_API_URL", "http://127.0.0.1:8000").rstrip("/")
+API_URL = os.environ.get("FASHION_API_URL", "").rstrip("/")
+
+
+@st.cache_resource
+def local_backend():
+    # Réutilise exactement le contrat et le modèle de l'API, sans serveur HTTP.
+    from app import ImageInput, predict
+    return ImageInput, predict
 
 with st.sidebar:
     st.header("Le service")
     try:
-        response = requests.get(API_URL + "/health", timeout=5)
-        response.raise_for_status()
-        health = response.json()
-        if not health.get("model_loaded"):
-            raise ValueError("Modèle indisponible")
-        st.success("API connectée")
-        st.caption(health.get("model_name", "Fashion-MNIST"))
+        if API_URL:
+            response = requests.get(API_URL + "/health", timeout=5)
+            response.raise_for_status()
+            health = response.json()
+            if not health.get("model_loaded"):
+                raise ValueError("Modèle indisponible")
+            st.success("API connectée")
+            st.caption(health.get("model_name", "Fashion-MNIST"))
+        else:
+            st.info("Mode autonome · modèle embarqué")
     except (requests.RequestException, ValueError):
         st.warning("API indisponible")
         st.code("python -m uvicorn app:app --port 8000")
@@ -70,9 +80,14 @@ with predict_tab:
         if st.button("Analyser l’image", type="primary", disabled=pixels is None):
             try:
                 with st.spinner("Analyse en cours…"):
-                    response = requests.post(API_URL + "/predict", json={"pixels": pixels.reshape(-1).tolist()}, timeout=60)
-                    response.raise_for_status()
-                    result = response.json()
+                    payload = {"pixels": pixels.reshape(-1).tolist()}
+                    if API_URL:
+                        response = requests.post(API_URL + "/predict", json=payload, timeout=60)
+                        response.raise_for_status()
+                        result = response.json()
+                    else:
+                        ImageInput, predict = local_backend()
+                        result = predict(ImageInput(**payload))
                 st.success(result["class_name"])
                 confidence, latency = st.columns(2)
                 confidence.metric("Confiance", f"{result['confidence']:.2%}")
@@ -87,8 +102,8 @@ with predict_tab:
                 with st.expander("Réponse JSON"):
                     st.json(result)
                 st.download_button("Télécharger le résultat", json.dumps(result, indent=2), "prediction.json", "application/json")
-            except (requests.RequestException, ValueError, KeyError) as exc:
-                st.error(f"La prédiction a échoué. Vérifiez le serveur FastAPI. {exc}")
+            except (requests.RequestException, ValueError, KeyError, ImportError, OSError) as exc:
+                st.error(f"La prédiction a échoué. Vérifiez le modèle et les dépendances, ou le serveur en mode API. {exc}")
 
 with results_tab:
     data = json.loads((ROOT / "resultats/resultats.json").read_text(encoding="utf-8"))
@@ -104,7 +119,7 @@ with results_tab:
 
 with about_tab:
     st.subheader("Du modèle à l’API")
-    st.write("L’interface envoie 784 pixels à FastAPI. Le serveur normalise l’image, exécute le modèle Keras puis applique softmax pour renvoyer la classe, sa confiance et la latence.")
+    st.write("L’interface utilise le modèle embarqué en mode autonome. Si FASHION_API_URL est configurée, elle envoie 784 pixels à FastAPI par HTTP. Les deux modes utilisent le même prétraitement et la même fonction de prédiction.")
     st.write("Architecture : Flatten → Dense 128 avec ReLU → Dense 10. Le modèle contient 101 770 paramètres.")
     report = ROOT / "rapport/Rapport_FastAPI_Aarab_Agrigah.docx"
     st.download_button("Télécharger le rapport Word", report.read_bytes(), report.name, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")

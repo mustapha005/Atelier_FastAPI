@@ -4,6 +4,19 @@ Mustapha Aarab et Aya Agrigah
 
 ## Interface Streamlit
 
+### Déploiement sur Streamlit Community Cloud
+
+Choisir le dépôt, la branche `main`, le fichier `streamlit_app.py`, puis
+**Advanced settings → Python version → 3.12** avant de déployer.
+TensorFlow 2.21.0 n'a pas de paquet compatible avec Python 3.14.
+Pour changer Python sur une application existante, noter ses paramètres,
+supprimer uniquement le déploiement Streamlit puis le recréer en Python 3.12.
+
+Sans `FASHION_API_URL`, l'interface fonctionne en mode autonome : elle charge
+le modèle embarqué une seule fois et réutilise la fonction de prédiction de
+`app.py`. Aucun serveur FastAPI séparé n'est nécessaire sur Streamlit Cloud.
+Pour le TP et les tests HTTP, démarrer FastAPI et définir `FASHION_API_URL`.
+
 L'interface française propose 20 exemples Fashion-MNIST inclus dans le dépôt,
 l'import PNG/JPEG, un aperçu des pixels envoyés, la classe prédite, la confiance,
 la latence, le téléchargement JSON et les résultats de la campagne du TP.
@@ -21,11 +34,12 @@ Puis lancer l'interface dans un deuxième terminal :
 python -m streamlit run streamlit_app.py
 ```
 
-Ouvrir http://localhost:8501. L'interface appelle réellement l'API par HTTP.
+Ouvrir http://localhost:8501. Pour activer les appels HTTP sous PowerShell,
+définir `$env:FASHION_API_URL="http://127.0.0.1:8000"` avant de lancer Streamlit.
 La variable d'environnement `FASHION_API_URL` permet d'utiliser un autre serveur.
-Pour héberger l'interface à distance, déployer aussi le serveur FastAPI et configurer
-cette variable avec son URL accessible ; publier le dépôt GitHub seul ne démarre
-pas les services. Les imports sont limités à 5 Mo et convertis en niveaux de gris
+Pour utiliser le mode HTTP à distance, déployer aussi le serveur FastAPI et configurer
+cette variable avec son URL accessible. Le mode autonome est utilisé par défaut.
+Les imports sont limités à 5 Mo et convertis en niveaux de gris
 28 × 28 ; utiliser un vêtement isolé sur fond noir. Les photos ordinaires ne suivent
 pas nécessairement la distribution Fashion-MNIST.
 
